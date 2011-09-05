@@ -2,6 +2,8 @@ package br.edu.ufcg.srh.adicionais.client;
 
 import br.edu.ufcg.srh.adicionais.client.view.CentroView;
 import br.edu.ufcg.srh.adicionais.client.view.CentroViewImpl;
+import br.edu.ufcg.srh.adicionais.client.view.FormView;
+import br.edu.ufcg.srh.adicionais.client.view.FormViewImpl;
 import br.edu.ufcg.srh.adicionais.client.view.LoginView;
 import br.edu.ufcg.srh.adicionais.client.view.LoginViewImpl;
 import br.edu.ufcg.srh.adicionais.client.view.SrhView;
@@ -18,6 +20,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	private final LoginView loginView = new LoginViewImpl();
 	private final CentroView centroView = new CentroViewImpl();
 	private final SrhView srhView = new SrhViewImpl();
+	private final FormView FormView = new FormViewImpl();
 
 	@Override
 	public EventBus getEventBus() {
@@ -43,4 +46,12 @@ public class ClientFactoryImpl implements ClientFactory {
 	public SrhView getSrhView() {
 		return this.srhView;
 	}
+	
+	@Override
+	public FormView getFormView() {
+		return this.FormView ;
+	}
+	
+	
+	
 }

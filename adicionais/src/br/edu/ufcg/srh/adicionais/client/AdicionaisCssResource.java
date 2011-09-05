@@ -10,4 +10,5 @@ public interface AdicionaisCssResource extends CssResource {
 	public String content();
 	public String footer();
 	public String developers();
+	public String formTitle();
 }

@@ -1,6 +1,7 @@
 package br.edu.ufcg.srh.adicionais.client.activity;
 
 import br.edu.ufcg.srh.adicionais.client.ClientFactory;
+import br.edu.ufcg.srh.adicionais.client.place.FormPlace;
 import br.edu.ufcg.srh.adicionais.client.view.LoginView;
 
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -34,7 +35,7 @@ public class LoginActivity extends AbstractActivity implements Presenter {
 		loginView.getOkButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				login(lv.getLoginTextBox(), lv.getPasswordTextBox());
+				goTo(new FormPlace("Form"));
 			}
 
 		});

@@ -2,9 +2,11 @@ package br.edu.ufcg.srh.adicionais.client.mapper;
 
 import br.edu.ufcg.srh.adicionais.client.ClientFactory;
 import br.edu.ufcg.srh.adicionais.client.activity.CentroActivity;
+import br.edu.ufcg.srh.adicionais.client.activity.FormActivity;
 import br.edu.ufcg.srh.adicionais.client.activity.LoginActivity;
 import br.edu.ufcg.srh.adicionais.client.activity.SrhActivity;
 import br.edu.ufcg.srh.adicionais.client.place.CentroPlace;
+import br.edu.ufcg.srh.adicionais.client.place.FormPlace;
 import br.edu.ufcg.srh.adicionais.client.place.LoginPlace;
 import br.edu.ufcg.srh.adicionais.client.place.SrhPlace;
 
@@ -31,6 +33,12 @@ public class AdicionaisAcitivityMapper implements ActivityMapper {
 		if (place instanceof SrhPlace) {
 			return new SrhActivity(this.clientFactory);
 		}
+		if (place instanceof FormPlace) {
+			return new FormActivity(this.clientFactory);
+		}
+		
+		
+		
 		return null;
 	}
 }

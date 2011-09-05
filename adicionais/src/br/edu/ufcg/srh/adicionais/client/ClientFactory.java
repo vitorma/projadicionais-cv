@@ -1,6 +1,7 @@
 package br.edu.ufcg.srh.adicionais.client;
 
 import br.edu.ufcg.srh.adicionais.client.view.CentroView;
+import br.edu.ufcg.srh.adicionais.client.view.FormView;
 import br.edu.ufcg.srh.adicionais.client.view.LoginView;
 import br.edu.ufcg.srh.adicionais.client.view.SrhView;
 
@@ -13,4 +14,5 @@ public interface ClientFactory {
 	public LoginView getLoginView();
 	public CentroView getCentroView();
 	public SrhView getSrhView();
+	public FormView getFormView();
 }
