@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -96,28 +97,7 @@ public class FormViewImpl extends Composite implements FormView {
 		this.submitButton = new Button("Submeter formulário");
 		
 		this.cleanButton = new Button("Limpar");
-		this.cleanButton.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				matriculaTextBox.setText("");
-				nomeTextBox.setText("");
-				for (int i = 0; i < carreiraRadioButtonsPanel.getWidgetCount(); i++) {
-					((RadioButton) carreiraRadioButtonsPanel.getWidget(i)).setValue(false);
-				}				
-				localizacaoTextBox.setText("");
-				tipoDeRiscoComboBox.setSelectedIndex(0);
-				agenteDeRiscoComboBox.setSelectedIndex(0);
-				setorTextBox.setText("");
-				horasTextBox.setText("");
-				descricaoTextArea.setText("");
 				
-				matriculaTextBox.setFocus(true);
-				
-			}
-		});
-		
-		
 		grid.setCellSpacing(8);
 		grid.setWidget(0, 0, matriculaLabel);
 		grid.setWidget(0, 1, this.matriculaTextBox);
@@ -217,6 +197,11 @@ public class FormViewImpl extends Composite implements FormView {
 	public ListBox getTipoDeRiscoComboBox() {
 		// TODO Auto-generated method stub
 		return this.tipoDeRiscoComboBox;
+	}
+
+	@Override
+	public VerticalPanel getCarreiraRadioButtonsPanel() {
+		return this.carreiraRadioButtonsPanel;
 	}
 
 }
