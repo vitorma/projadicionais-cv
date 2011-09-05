@@ -21,62 +21,34 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
-
 public class FormActivity extends AbstractActivity implements Presenter {
 
 	private ClientFactory clientFactory;
-	private FormView formView;	
-	private SubmitServiceAsync submitService = (SubmitServiceAsync) GWT.create(SubmitService.class);
-		
+	private FormView formView;
+	private SubmitServiceAsync submitService = (SubmitServiceAsync) GWT
+			.create(SubmitService.class);
+
 	public FormActivity(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 	}
-	
+
 	private void addClickHandlersToViewButtons(FormView formView) {
 		final FormView fv = formView;
 		fv.getCleanButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-					fv.getMatriculaTextBox().setText("");
-					fv.getNomeTextBox().setText("");
-					for (int i = 0; i < fv.getCarreiraRadioButtonsPanel().getWidgetCount(); i++) {
-						((RadioButton) fv.getCarreiraRadioButtonsPanel().getWidget(i)).setValue(false);
-					}				
-					fv.getLocalizacaoTextBox().setText("");
-					fv.getTipoDeRiscoComboBox().setSelectedIndex(0);
-					fv.getAgenteDeRiscoComboBox().setSelectedIndex(0);
-					fv.getSetorTextBox().setText("");
-					fv.getHorasTextBox().setText("");
-					fv.getDescricaoTextArea().setText("");
-					
-					fv.getMatriculaTextBox().setFocus(true);
-					
+				resetarFormulario();
 			}
 
 		});
-		
+
 		fv.getSubmitButton().addClickHandler(new ClickHandler() {
-			
 			@Override
 			public void onClick(ClickEvent event) {
-				submitService.subimit(fv.getMatriculaTextBox().getText(),fv.getNomeTextBox().getText(), fv.getCarreiraSelecionada().getFormValue(), fv.getLocalizacaoTextBox().getText(), fv.getSetorTextBox().getText(), fv.getHorasTextBox().getText(), fv.getTipoDeRiscoComboBox().getValue(fv.getTipoDeRiscoComboBox().getSelectedIndex()), fv.getAgenteDeRiscoComboBox().getValue(fv.getAgenteDeRiscoComboBox().getSelectedIndex()), fv.getDescricaoTextArea().getText(), new AsyncCallback<String>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert(caught.getMessage());
-						
-					}
-
-					@Override
-					public void onSuccess(String result) {
-						Window.alert("Servidor de matrcula" + result + "cadastrado com sucesso");
-						
-					}
-				});
-				
+				submeterFormulario();
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -91,4 +63,56 @@ public class FormActivity extends AbstractActivity implements Presenter {
 		panel.setWidget(this.formView.asWidget());
 		this.addClickHandlersToViewButtons(this.formView);
 	}
+
+	private void resetarFormulario() {
+		this.formView.getMatriculaTextBox().setText("");
+		this.formView.getNomeTextBox().setText("");
+		for (int i = 0; i < this.formView.getCarreiraRadioButtonsPanel()
+				.getWidgetCount(); i++) {
+			((RadioButton) this.formView.getCarreiraRadioButtonsPanel()
+					.getWidget(i)).setValue(false);
+		}
+		this.formView.getLocalizacaoTextBox().setText("");
+		this.formView.getTipoDeRiscoComboBox().setSelectedIndex(0);
+		this.formView.getAgenteDeRiscoComboBox().setSelectedIndex(0);
+		this.formView.getSetorTextBox().setText("");
+		this.formView.getHorasTextBox().setText("");
+		this.formView.getDescricaoTextArea().setText("");
+
+		this.formView.getMatriculaTextBox().setFocus(true);
+	}
+
+	private void submeterFormulario() {
+		submitService.subimit(
+				this.formView.getMatriculaTextBox().getText(),
+				this.formView.getNomeTextBox().getText(),
+				this.formView.getCarreiraSelecionada().getFormValue(),
+				this.formView.getLocalizacaoTextBox().getText(),
+				this.formView.getSetorTextBox().getText(),
+				this.formView.getHorasTextBox().getText(),
+				this.formView.getTipoDeRiscoComboBox().getValue(
+						this.formView.getTipoDeRiscoComboBox()
+								.getSelectedIndex()),
+				this.formView.getAgenteDeRiscoComboBox().getValue(
+						this.formView.getAgenteDeRiscoComboBox()
+								.getSelectedIndex()), this.formView
+						.getDescricaoTextArea().getText(),
+				new AsyncCallback<String>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert(caught.getMessage());
+
+					}
+
+					@Override
+					public void onSuccess(String result) {
+						Window.alert("Servidor de matrcula" + result
+								+ "cadastrado com sucesso");
+
+					}
+				});
+
+	}
+
 }

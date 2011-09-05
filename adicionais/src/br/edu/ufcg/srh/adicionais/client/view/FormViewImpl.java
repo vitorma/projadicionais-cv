@@ -1,5 +1,7 @@
 package br.edu.ufcg.srh.adicionais.client.view;
 
+import javax.swing.Scrollable;
+
 import br.edu.ufcg.srh.adicionais.client.Adicionais;
 import br.edu.ufcg.srh.adicionais.client.activity.Presenter;
 
@@ -16,6 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -36,8 +39,10 @@ public class FormViewImpl extends Composite implements FormView {
 	private VerticalPanel carreiraRadioButtonsPanel;
 
 	public FormViewImpl() {
+		ScrollPanel sp = new ScrollPanel();
 		VerticalPanel vp = new VerticalPanel();
-		this.initWidget(vp);
+		this.initWidget(sp);
+		sp.setSize("100%", "100%");
 		vp.setSize("100%", "100%");
 
 		FlexTable grid = new FlexTable();
@@ -59,7 +64,7 @@ public class FormViewImpl extends Composite implements FormView {
 		carreiraRadioButtonsPanel.add(tecnicoRadioButton);
 		carreiraRadioButtonsPanel.setSpacing(4);
 
-		Label localizacaoLabel = new Label("Unidade de localização");
+		Label localizacaoLabel = new Label("Unidade de localização:");
 		this.localizacaoTextBox = new TextBox();
 
 		Label tipoDeRiscoLabel = new Label("Tipo de risco:");
@@ -102,23 +107,23 @@ public class FormViewImpl extends Composite implements FormView {
 		grid.setWidget(0, 0, matriculaLabel);
 		grid.setWidget(0, 1, this.matriculaTextBox);
 		grid.setWidget(1, 0, nomeLabel);
-		grid.setWidget(1, 1, nomeTextBox);
+		grid.setWidget(1, 1, this.nomeTextBox);
 		grid.setWidget(2, 0, carreiraLabel);
-		grid.setWidget(2, 1, carreiraRadioButtonsPanel);
+		grid.setWidget(2, 1, this.carreiraRadioButtonsPanel);
 		grid.setWidget(3, 0, localizacaoLabel);
-		grid.setWidget(3, 1, localizacaoTextBox);
+		grid.setWidget(3, 1, this.localizacaoTextBox);
 		grid.setWidget(4, 0, tipoDeRiscoLabel);
-		grid.setWidget(4, 1, tipoDeRiscoComboBox);
+		grid.setWidget(4, 1, this.tipoDeRiscoComboBox);
 		grid.setWidget(5, 0, agenteDeRiscoLabel);
-		grid.setWidget(5, 1, agenteDeRiscoComboBox);
+		grid.setWidget(5, 1, this.agenteDeRiscoComboBox);
 		grid.setWidget(6, 0, setorLabel);
 		grid.setWidget(6, 1, setorTextBox);
 		grid.setWidget(7, 0, horasLabel);
-		grid.setWidget(7, 1, horasTextBox);
+		grid.setWidget(7, 1, this.horasTextBox);
 		grid.setWidget(8, 0, descricaoLabel);
-		grid.setWidget(8, 1, descricaoTextArea);
-		grid.setWidget(9, 0, cleanButton);
-		grid.setWidget(9, 1, submitButton);
+		grid.setWidget(8, 1, this.descricaoTextArea);
+		grid.setWidget(9, 0, this.cleanButton);
+		grid.setWidget(9, 1, this.submitButton);
 		grid.getCellFormatter().setHorizontalAlignment(9, 1,
 				HasHorizontalAlignment.ALIGN_RIGHT);
 
@@ -129,10 +134,10 @@ public class FormViewImpl extends Composite implements FormView {
 				HasHorizontalAlignment.ALIGN_CENTER);
 
 		vp.add(grid);
-		vp
-				.setCellHorizontalAlignment(grid,
+		vp.setCellHorizontalAlignment(grid,
 						HasHorizontalAlignment.ALIGN_CENTER);
-
+		sp.add(vp);
+		
 	}
 
 	@Override
