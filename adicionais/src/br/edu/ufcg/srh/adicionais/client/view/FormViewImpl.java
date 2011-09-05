@@ -20,7 +20,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
 public class FormViewImpl extends Composite implements FormView {
 
 	private Presenter presenter;
@@ -35,69 +34,70 @@ public class FormViewImpl extends Composite implements FormView {
 	private Button submitButton;
 	private Button cleanButton;
 	private VerticalPanel carreiraRadioButtonsPanel;
-	
+
 	public FormViewImpl() {
 		VerticalPanel vp = new VerticalPanel();
 		this.initWidget(vp);
 		vp.setSize("100%", "100%");
-				
+
 		FlexTable grid = new FlexTable();
-		
+
 		Label tituloLabel = new Label("Identificação de riscos");
 		tituloLabel.setStyleName(Adicionais.RESOURCES.css().formTitle());
-		
+
 		Label matriculaLabel = new Label("Matrícula do servidor:");
 		this.matriculaTextBox = new TextBox();
-		
+
 		Label nomeLabel = new Label("Nome do servidor:");
 		this.nomeTextBox = new TextBox();
-		
+
 		Label carreiraLabel = new Label("Carreira:");
 		this.carreiraRadioButtonsPanel = new VerticalPanel();
 		RadioButton docenteRadioButton = new RadioButton("carreira", "Docente");
-	    RadioButton tecnicoRadioButton = new RadioButton("carreira", "Técnico");
-	    carreiraRadioButtonsPanel.add(docenteRadioButton);
-	    carreiraRadioButtonsPanel.add(tecnicoRadioButton);
-	    carreiraRadioButtonsPanel.setSpacing(4);
-	   	    
-	    Label localizacaoLabel = new Label("Unidade de localização");
+		RadioButton tecnicoRadioButton = new RadioButton("carreira", "Técnico");
+		carreiraRadioButtonsPanel.add(docenteRadioButton);
+		carreiraRadioButtonsPanel.add(tecnicoRadioButton);
+		carreiraRadioButtonsPanel.setSpacing(4);
+
+		Label localizacaoLabel = new Label("Unidade de localização");
 		this.localizacaoTextBox = new TextBox();
-		
+
 		Label tipoDeRiscoLabel = new Label("Tipo de risco:");
 		this.tipoDeRiscoComboBox = new ListBox();
 		tipoDeRiscoComboBox.addItem("Insalubridade");
 		tipoDeRiscoComboBox.addItem("Periculosidade");
 		tipoDeRiscoComboBox.addItem("Radiação ionizante");
-		
+
 		Label agenteDeRiscoLabel = new Label("Agente de risco:");
 		this.agenteDeRiscoComboBox = new ListBox();
 		agenteDeRiscoComboBox.addItem("Físico");
 		agenteDeRiscoComboBox.addItem("Químico");
 		agenteDeRiscoComboBox.addItem("Biológico");
-				
+
 		Label setorLabel = new Label("Setor de risco:");
 		this.setorTextBox = new TextBox();
-		
+
 		Label horasLabel = new Label("Horas trabalhadas no setor:");
 		this.horasTextBox = new TextBox();
 		this.horasTextBox.setMaxLength(2);
 		this.horasTextBox.setVisibleLength(2);
 		// Let's disallow non-numeric entry in the normal text box.
-	    this.horasTextBox.addKeyPressHandler(new KeyPressHandler() {
-	        public void onKeyPress(KeyPressEvent event){ 
-	        	if ((event.getUnicodeCharCode() != 0) && (!Character.isDigit(event.getCharCode()))) {
-	        	  ((TextBox) event.getSource()).cancelKey();
-	          }
-	        }
-	      });
-				
+		this.horasTextBox.addKeyPressHandler(new KeyPressHandler() {
+			public void onKeyPress(KeyPressEvent event) {
+				if ((event.getUnicodeCharCode() != 0)
+						&& (!Character.isDigit(event.getCharCode()))) {
+					((TextBox) event.getSource()).cancelKey();
+				}
+			}
+		});
+
 		Label descricaoLabel = new Label("Descrição:");
 		this.descricaoTextArea = new TextArea();
-		
+
 		this.submitButton = new Button("Submeter formulário");
-		
+
 		this.cleanButton = new Button("Limpar");
-				
+
 		grid.setCellSpacing(8);
 		grid.setWidget(0, 0, matriculaLabel);
 		grid.setWidget(0, 1, this.matriculaTextBox);
@@ -119,15 +119,20 @@ public class FormViewImpl extends Composite implements FormView {
 		grid.setWidget(8, 1, descricaoTextArea);
 		grid.setWidget(9, 0, cleanButton);
 		grid.setWidget(9, 1, submitButton);
-		grid.getCellFormatter().setHorizontalAlignment(9, 1, HasHorizontalAlignment.ALIGN_RIGHT);
-		
+		grid.getCellFormatter().setHorizontalAlignment(9, 1,
+				HasHorizontalAlignment.ALIGN_RIGHT);
+
 		vp.add(tituloLabel);
-		vp.setCellVerticalAlignment(tipoDeRiscoLabel, HasVerticalAlignment.ALIGN_TOP);
-		vp.setCellHorizontalAlignment(tituloLabel, HasHorizontalAlignment.ALIGN_CENTER);
-		
+		vp.setCellVerticalAlignment(tipoDeRiscoLabel,
+				HasVerticalAlignment.ALIGN_TOP);
+		vp.setCellHorizontalAlignment(tituloLabel,
+				HasHorizontalAlignment.ALIGN_CENTER);
+
 		vp.add(grid);
-		vp.setCellHorizontalAlignment(grid, HasHorizontalAlignment.ALIGN_CENTER);
-		
+		vp
+				.setCellHorizontalAlignment(grid,
+						HasHorizontalAlignment.ALIGN_CENTER);
+
 	}
 
 	@Override
@@ -138,14 +143,14 @@ public class FormViewImpl extends Composite implements FormView {
 	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
-		
+
 	}
-	
+
 	@Override
 	public TextBox getMatriculaTextBox() {
 		return this.matriculaTextBox;
 	}
-	
+
 	@Override
 	public TextBox getNomeTextBox() {
 		return this.nomeTextBox;
@@ -180,7 +185,6 @@ public class FormViewImpl extends Composite implements FormView {
 		return this.localizacaoTextBox;
 	}
 
-
 	@Override
 	public TextBox getSetorTextBox() {
 		// TODO Auto-generated method stub
@@ -204,4 +208,17 @@ public class FormViewImpl extends Composite implements FormView {
 		return this.carreiraRadioButtonsPanel;
 	}
 
+	@Override
+	public RadioButton getCarreiraSelecionada() {
+		for (int i = 0; i < this.getCarreiraRadioButtonsPanel()
+				.getWidgetCount(); i++) {
+			RadioButton r = (RadioButton) this.getCarreiraRadioButtonsPanel().getWidget(i);
+			if (r.getValue()) {
+				return r;
+			}
+
+		}
+		return null;
+
+	}
 }

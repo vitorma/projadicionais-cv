@@ -2,7 +2,7 @@ package br.edu.ufcg.srh.adicionais.client.view;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,5 +20,6 @@ public interface FormView extends View{
 	public Button getSubmitButton();
 	public Button getCleanButton();
 	public VerticalPanel getCarreiraRadioButtonsPanel();
+	RadioButton getCarreiraSelecionada();
 	
 }

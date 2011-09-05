@@ -1,0 +1,2 @@
+serviceClass: br.edu.ufcg.srh.adicionais.client.SubmitService
+path: F80FDFC4B59763D73E88BCBB90066B16.gwt.rpc
