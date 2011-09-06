@@ -10,8 +10,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.TextBox;
 
 public class LoginActivity extends AbstractActivity implements Presenter {
 
@@ -31,7 +29,6 @@ public class LoginActivity extends AbstractActivity implements Presenter {
 	}
 
 	private void addClickHandlersToViewButtons(LoginView loginView) {
-		final LoginView lv = this.loginView;
 		loginView.getOkButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -41,13 +38,13 @@ public class LoginActivity extends AbstractActivity implements Presenter {
 		});
 	}
 
-	private void login(TextBox loginTextBox,
-			PasswordTextBox passwordTextBox) {
-		String login = loginTextBox.getText();
-		String password = passwordTextBox.getText();
-		
-		
-	}
+//	private void login(TextBox loginTextBox,
+//			PasswordTextBox passwordTextBox) {
+//		String login = loginTextBox.getText();
+//		String password = passwordTextBox.getText();
+//		
+//		
+//	}
 
 	@Override
 	public void goTo(Place place) {

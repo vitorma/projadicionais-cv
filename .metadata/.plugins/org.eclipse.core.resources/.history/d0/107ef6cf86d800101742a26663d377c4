@@ -1,0 +1,50 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+/**
+ * A {@link DAOFactory} that creates {@link DAO} objects for persistence on XML
+ * files.
+ * 
+ * @author Cleber G. de Sousa
+ */
+public class XmlDAOFactory implements DAOFactory {
+
+    @Override
+    public DAO<Operadora> ciarOperadoraDAO() {
+        return new XStreamDAO<Operadora>(
+                DataFolder.OPERADORAS.getDirectory());
+    }
+
+    @Override
+    public DAO<Plano> criarPlanoDAO() {
+        return new XStreamDAO<Plano>(
+                DataFolder.PLANOS.getDirectory());
+    }
+
+    @Override
+    public DAO<Beneficiario> criarBeneficiarioDAO() {
+        return new XStreamDAO<Beneficiario>(
+                DataFolder.BENEFICIARIOS.getDirectory());
+    }
+
+    @Override
+    public DAO<Processo> criarProcessoDAO() {
+        return new XStreamDAO<Processo>(
+                DataFolder.PROCESSOS.getDirectory());
+    }
+
+    @Override
+    public DAO<Auxilio> criarAuxilioDAO() {
+        return new XStreamDAO<Auxilio>(DataFolder.AUXILIOS.getDirectory());
+    }
+
+	@Override
+	public DAO<Feriado> criarFeriadoDAO() {
+		return new XStreamDAO<Feriado>(DataFolder.FERIADOS.getDirectory());
+	}
+
+	@Override
+	public DAO<TabelaValoresPerCapita> criarTabelaValoresPerCapitaDAO() {
+		return new XStreamDAO<TabelaValoresPerCapita>(
+				DataFolder.TVPC.getDirectory());
+	}
+}

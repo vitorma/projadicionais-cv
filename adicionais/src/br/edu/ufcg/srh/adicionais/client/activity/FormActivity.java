@@ -3,11 +3,7 @@ package br.edu.ufcg.srh.adicionais.client.activity;
 import br.edu.ufcg.srh.adicionais.client.ClientFactory;
 import br.edu.ufcg.srh.adicionais.client.SubmitService;
 import br.edu.ufcg.srh.adicionais.client.SubmitServiceAsync;
-import br.edu.ufcg.srh.adicionais.client.place.FormPlace;
-import br.edu.ufcg.srh.adicionais.client.view.CentroView;
 import br.edu.ufcg.srh.adicionais.client.view.FormView;
-import br.edu.ufcg.srh.adicionais.client.view.LoginView;
-import br.edu.ufcg.srh.adicionais.server.Registro;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
@@ -19,7 +15,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class FormActivity extends AbstractActivity implements Presenter {
 
@@ -83,36 +78,38 @@ public class FormActivity extends AbstractActivity implements Presenter {
 	}
 
 	private void submeterFormulario() {
-		submitService.subimit(
-				this.formView.getMatriculaTextBox().getText(),
-				this.formView.getNomeTextBox().getText(),
-				this.formView.getCarreiraSelecionada().getFormValue(),
-				this.formView.getLocalizacaoTextBox().getText(),
-				this.formView.getSetorTextBox().getText(),
-				this.formView.getHorasTextBox().getText(),
-				this.formView.getTipoDeRiscoComboBox().getValue(
-						this.formView.getTipoDeRiscoComboBox()
-								.getSelectedIndex()),
-				this.formView.getAgenteDeRiscoComboBox().getValue(
-						this.formView.getAgenteDeRiscoComboBox()
-								.getSelectedIndex()), this.formView
-						.getDescricaoTextArea().getText(),
-				new AsyncCallback<String>() {
+		try {
+			submitService.submit(
+					this.formView.getMatriculaTextBox().getText(),
+					this.formView.getNomeTextBox().getText(),
+					this.formView.getCarreiraSelecionada().getFormValue(),
+					this.formView.getLocalizacaoTextBox().getText(),
+					this.formView.getSetorTextBox().getText(),
+					this.formView.getHorasTextBox().getText(),
+					this.formView.getTipoDeRiscoComboBox().getValue(
+							this.formView.getTipoDeRiscoComboBox()
+									.getSelectedIndex()),
+					this.formView.getAgenteDeRiscoComboBox().getValue(
+							this.formView.getAgenteDeRiscoComboBox()
+									.getSelectedIndex()), this.formView
+							.getDescricaoTextArea().getText(),
+					new AsyncCallback<String>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert(caught.getMessage());
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert(caught.getMessage());
 
-					}
+						}
 
-					@Override
-					public void onSuccess(String result) {
-						Window.alert("Servidor de matrcula" + result
-								+ "cadastrado com sucesso");
+						@Override
+						public void onSuccess(String result) {
+							Window.alert("Servidor de matrícula" + result
+									+ "cadastrado com sucesso");
 
-					}
-				});
-
+						}
+					});
+		} catch (Exception e) {
+			Window.alert(e.getMessage());
+		}
 	}
-
 }

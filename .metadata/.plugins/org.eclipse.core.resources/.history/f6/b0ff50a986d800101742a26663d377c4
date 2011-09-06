@@ -1,0 +1,46 @@
+package persistencia;
+
+import modelo.Auxilio;
+import modelo.Beneficiario;
+import modelo.Feriado;
+import modelo.Operadora;
+import modelo.Plano;
+import modelo.Processo;
+import modelo.TabelaValoresPerCapita;
+
+/**
+ * A {@link DAO} factory.
+ * 
+ * @author Cleber Gonçalves de Sousa
+ */
+public interface DAOFactory {
+
+    /**
+     * @return a new {@link Operadora} DAO
+     */
+    public DAO<Operadora> ciarOperadoraDAO();
+
+    /**
+     * @return a new {@link Plano} DAO
+     */
+    public DAO<Plano> criarPlanoDAO();
+
+    /**
+     * @return a new {@link Beneficiario} DAO
+     */
+    public DAO<Beneficiario> criarBeneficiarioDAO();
+
+    /**
+     * @return a new {@link Processo} DAO
+     */
+    public DAO<Processo> criarProcessoDAO();
+
+    /**
+     * @return a new {@link Auxilio} DAO
+     */
+    public DAO<Auxilio> criarAuxilioDAO();
+
+    public DAO<Feriado> criarFeriadoDAO();
+
+    public DAO<TabelaValoresPerCapita> criarTabelaValoresPerCapitaDAO();
+}

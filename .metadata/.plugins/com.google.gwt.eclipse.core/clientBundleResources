@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+<deps cu="=adicionais/src&lt;br.edu.ufcg.srh.adicionais.client{AdicionaisResources.java">
+<res path="br/edu/ufcg/srh/adicionais/client/Adicionais.css"/>
+<res path="image12.png"/>
+<res path="logo.png"/>
+<res path="br/edu/ufcg/srh/adicionais/client/logoIce.png"/>
+<res path="br/edu/ufcg/srh/adicionais/client/image12.png"/>
+<res path="logoIce.png"/>
+<res path="Adicionais.css"/>
+<res path="br/edu/ufcg/srh/adicionais/client/logo.png"/>
+</deps>
+</index>

@@ -1,0 +1,63 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+public class Servidor {
+	private String matricula;
+	private String nome;
+	private String carreira;
+	private String localizacao;
+	private String setorDeRisco;
+	private String horasNoSetorDeRisco;
+	private String tipoDeRisco;
+	private String risco;
+	private String descricao;
+	
+	public Servidor (String matricula, String nome, String carreira,
+			String localizacao, String setor, String horas, String tipoDeRisco,
+			String risco, String descricao) {		
+		this.matricula = matricula;
+		this.nome = nome;
+		this.carreira = carreira;
+		this.localizacao = localizacao;
+		this.setorDeRisco = setor;
+		this.horasNoSetorDeRisco = horas;
+		this.tipoDeRisco = tipoDeRisco;
+		this.risco = risco;
+		this.descricao = descricao;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCarreira() {
+		return carreira;
+	}
+
+	public String getLocalizacao() {
+		return localizacao;
+	}
+
+	public String getSetorDeRisco() {
+		return setorDeRisco;
+	}
+
+	public String getHorasNoSetorDeRisco() {
+		return horasNoSetorDeRisco;
+	}
+
+	public String getTipoDeRisco() {
+		return tipoDeRisco;
+	}
+
+	public String getRisco() {
+		return risco;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+}

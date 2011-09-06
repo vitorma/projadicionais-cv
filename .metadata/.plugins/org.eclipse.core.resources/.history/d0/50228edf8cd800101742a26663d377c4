@@ -1,0 +1,123 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+import java.util.Collection;
+
+/**
+ * 
+ * @author Cleber Gonçalves de Sousa
+ */
+public final class Persistencia {
+    private static Persistencia instancia;
+
+    private DAO<Servidor> servidores;
+
+    /**
+     * Private constructor to avoid public instantiations.
+     */
+    private Persistencia() {
+        this.servidores = new XmlDAOFactory().criarServidorDAO();
+    }
+
+    /**
+     * Provides access to the unique instance of {@code Persistence}.
+     * 
+     * @return the unique instance of {@code Persistence}
+     */
+    public synchronized static Persistencia getInstancia() {
+        if (instancia == null) {
+            instancia = new Persistencia();
+        }
+
+        return instancia;
+    }
+
+    /**
+     * Stores the given {@code operator} if it is not already stored.
+     * 
+     * @param operator the operator to store
+     * @throws IllegalArgumentException if the given {@code operator} is {@code
+     *         null}
+     */
+    public synchronized void inserirOperadora(Operadora operator) {
+        this.servidores.add(operator);
+    }
+
+    /**
+     * Stores the given {@code plan} if it is not already stored.
+     * 
+     * @param plan the plan to store
+     * @throws IllegalArgumentException if the given {@code plan} is {@code
+     *         null}
+     */
+    public synchronized void inserirPlano(Plano plan) {
+        this.planos.add(plan);
+    }
+
+    /**
+     * Stores the given {@code beneficiary} if it is not already stored.
+     * 
+     * @param beneficiary the beneficiary to store
+     * @throws IllegalArgumentException if the given {@code beneficiary} is
+     *         {@code null}
+     */
+    public synchronized void inserirBeneficiario(Beneficiario beneficiary) {
+        this.beneficiarios.add(beneficiary);
+    }
+
+    public synchronized void inserirProcesso(Processo processo) {
+        this.processos.add(processo);
+    }
+
+    /**
+     * Stores the given {@code aid} if it is not already stored.
+     * 
+     * @param aid the aid to store
+     * @throws IllegalArgumentException if the given {@code aid} is {@code null}
+     */
+    public synchronized void inserirAuxilio(Auxilio aid) {
+        this.auxilios.add(aid);
+    }
+
+    public synchronized void inserirFeriado(Feriado f) {
+        this.feriados.add(f);
+    }
+
+    public synchronized void inserirTabela(TabelaValoresPerCapita tvpc) {
+    	this.tabelas.add(tvpc);
+    }
+
+    /**
+     * Removes the operator with the given {@code id} if such entity is stored.
+     * 
+     * @param id the id of the operator to remove
+     */
+    public synchronized void removeOperator(Id id) {
+        this.servidores.remove(this.getServidor(id));
+    }
+
+    public synchronized void atualizarServidor(Servidor s) {
+        this.servidores.update(s);
+    }
+
+    public synchronized Servidor getServidor(Id id) {
+        return this.servidores.get(id);
+    }
+
+    public synchronized Servidor getServidorPor(
+            Especificacao<Servidor> specification) {
+        return this.servidores.getBy(specification);
+    }
+
+    public synchronized Collection<Servidor> getTodosServidoresPor(
+            Especificacao<Servidor> specification) {
+        return this.servidores.getAllBy(specification);
+    }
+
+    public synchronized Collection<Servidor> getTodosServidores() {
+        return this.servidores.getAll();
+    }
+
+    public synchronized Id novoIdServidor() {
+        return this.servidores.getNewId();
+    }
+}

@@ -1,0 +1,100 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+public class Servidor {
+	private String matricula;
+	private String nome;
+	private String carreira;
+	private String localizacao;
+	private String setorDeRisco;
+	private String horasNoSetorDeRisco;
+	private String tipoDeRisco;
+	private String risco;
+	private String descricao;
+	
+	public Servidor (String matricula, String nome, String carreira,
+			String localizacao, String setor, String horas, String tipoDeRisco,
+			String risco, String descricao) {		
+		this.matricula = matricula;
+		this.nome = nome;
+		this.carreira = carreira;
+		this.localizacao = localizacao;
+		this.setorDeRisco = setor;
+		this.horasNoSetorDeRisco = horas;
+		this.tipoDeRisco = tipoDeRisco;
+		this.risco = risco;
+		this.descricao = descricao;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCarreira() {
+		return carreira;
+	}
+
+	public void setCarreira(String carreira) {
+		this.carreira = carreira;
+	}
+
+	public String getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+	}
+
+	public String getSetor() {
+		return setorDeRisco;
+	}
+
+	public void setSetor(String setor) {
+		this.setorDeRisco = setor;
+	}
+
+	public String getHoras() {
+		return horasNoSetorDeRisco;
+	}
+
+	public void setHoras(String horas) {
+		this.horasNoSetorDeRisco = horas;
+	}
+
+	public String getTipoDeRisco() {
+		return tipoDeRisco;
+	}
+
+	public void setTipoDeRisco(String tipoDeRisco) {
+		this.tipoDeRisco = tipoDeRisco;
+	}
+
+	public String getAgenteDeRisco() {
+		return risco;
+	}
+
+	public void setAgenteDeRisco(String agenteDeRisco) {
+		this.risco = agenteDeRisco;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+}

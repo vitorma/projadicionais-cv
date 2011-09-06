@@ -1,0 +1,90 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+public class Servidor {
+	private String matricula;
+	private String nome;
+	private String carreira;
+	private String centro;
+	private String localizacao;
+	private String setorDeRisco;
+	private String horasNoSetorDeRisco;
+	private String tipoDeRisco;
+	private String risco;
+	private String descricao;
+	
+	public Servidor (String matricula, String nome, String carreira,
+			String localizacao, String setor, String horas, String tipoDeRisco,
+			String risco, String descricao) {		
+		this.matricula = matricula;
+		this.nome = nome;
+		this.carreira = carreira;
+		this.localizacao = localizacao;
+		this.setorDeRisco = setor;
+		this.horasNoSetorDeRisco = horas;
+		this.tipoDeRisco = tipoDeRisco;
+		this.risco = risco;
+		this.descricao = descricao;
+	}
+
+	public String getMatricula() {
+		return this.matricula;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public String getCarreira() {
+		return this.carreira;
+	}
+
+	public String getCentro() {
+		return this.centro;
+	}
+
+	public String getLocalizacao() {
+		return this.localizacao;
+	}
+
+	public String getSetorDeRisco() {
+		return this.setorDeRisco;
+	}
+
+	public String getHorasNoSetorDeRisco() {
+		return this.horasNoSetorDeRisco;
+	}
+
+	public String getTipoDeRisco() {
+		return this.tipoDeRisco;
+	}
+
+	public String getRisco() {
+		return this.risco;
+	}
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.matricula.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Servidor))
+			return false;
+		Servidor other = (Servidor) obj;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		return true;
+	}
+}

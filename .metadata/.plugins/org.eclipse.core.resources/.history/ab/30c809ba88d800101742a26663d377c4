@@ -1,0 +1,438 @@
+package br.edu.ufcg.srh.adicionais.server;
+
+import java.util.Collection;
+
+/**
+ * 
+ * @author Cleber Gonçalves de Sousa
+ */
+public final class Persistencia {
+    private static Persistencia instancia;
+
+    private DAO<Servidor> servidores;
+
+    /**
+     * Private constructor to avoid public instantiations.
+     */
+    private Persistencia() {
+        this.servidores = new XmlDAOFactory().criarServidorDAO();
+    }
+
+    /**
+     * Provides access to the unique instance of {@code Persistence}.
+     * 
+     * @return the unique instance of {@code Persistence}
+     */
+    public synchronized static Persistencia getInstancia() {
+        if (instancia == null) {
+            instancia = new Persistencia();
+        }
+
+        return instancia;
+    }
+
+    /**
+     * Stores the given {@code operator} if it is not already stored.
+     * 
+     * @param s the operator to store
+     * @throws IllegalArgumentException if the given {@code operator} is {@code
+     *         null}
+     */
+    public synchronized void inserirServidor(Servidor s) {
+        this.servidores.add(s);
+    }
+
+    /**
+     * Removes the operator with the given {@code id} if such entity is stored.
+     * 
+     * @param id the id of the operator to remove
+     */
+    public synchronized void removerServidor(Id id) {
+        this.servidores.remove(this.getServidor(id));
+    }
+
+    /**
+     * Updates the given {@code Operator} if such entity is stored.
+     * 
+     * @param operator the operator to update
+     * @throws IllegalArgumentException if the given {@code operator} is {@code
+     *         null}
+     */
+    public synchronized void atualizarServidor(Operadora operator) {
+        this.servidores.update(operator);
+        this.updateParentReferences(operator);
+    }
+
+    /**
+     * Updates the given {@code plan} if such entity is stored.
+     * 
+     * @param plan the plan to update
+     * @throws IllegalArgumentException if the given {@code plan} is {@code
+     *         null}
+     */
+    public synchronized void updatePlan(Plano plan) {
+        this.planos.update(plan);
+        this.updateParentReferences(plan);
+    }
+
+    /**
+     * Updates the given {@code beneficiary} if such entity is stored.
+     * 
+     * @param beneficiary the beneficiary to update
+     * @throws IllegalArgumentException if the given {@code beneficiary} is
+     *         {@code null}
+     */
+    public synchronized void updateBeneficiary(Beneficiario beneficiary) {
+        this.beneficiarios.update(beneficiary);
+        this.updateParentReferences(beneficiary);
+    }
+
+    public synchronized void updateProcesso(Processo processo) {
+        this.processos.update(processo);
+        this.updateParentReferences(processo);
+    }
+
+    /**
+     * Updates the given {@code aid} if such entity is stored.
+     * 
+     * @param aid the aid to update
+     * @throws IllegalArgumentException if the given {@code aid} is {@code null}
+     */
+    public synchronized void updateAid(Auxilio aid) {
+        this.auxilios.update(aid);
+    }
+
+    public synchronized void updateFeriado(Feriado f) {
+        this.feriados.update(f);
+    }
+
+    public synchronized void updateTabela(TabelaValoresPerCapita tvpc) {
+    	this.tabelas.update(tvpc);
+    }
+
+    /**
+     * Retrieves the operator with the given {@code id} if such entity is
+     * stored.
+     * 
+     * @param id the id of the operator to retrieve
+     * @return the operator with the given {@code id} or {@code null} if such
+     *         entity is not stored
+     */
+    public synchronized Servidor getServidor(Id id) {
+        return this.servidores.get(id);
+    }
+
+    /**
+     * Retrieves the plan with the given {@code id} if such entity is stored.
+     * 
+     * @param id the id of the plan to retrieve
+     * @return the plan with the given {@code id} or {@code null} if such entity
+     *         is not stored
+     */
+    public synchronized Plano getPlan(Id id) {
+        return this.planos.get(id);
+    }
+
+    /**
+     * Retrieves the beneficiary with the given {@code id} if such entity is
+     * stored.
+     * 
+     * @param id the id of the beneficiary to retrieve
+     * @return the beneficiary with the given {@code id} or {@code null} if such
+     *         entity is not stored
+     */
+    public synchronized Beneficiario getBeneficiary(Id id) {
+        return this.beneficiarios.get(id);
+    }
+
+    public synchronized Processo getProcesso(Id id) {
+        return this.processos.get(id);
+    }
+
+    /**
+     * Retrieves the aid with the given {@code id} if such entity is stored.
+     * 
+     * @param id the id of the aid to retrieve
+     * @return the health aid with the given {@code id} or {@code null} if such
+     *         entity is not stored
+     */
+    public synchronized Auxilio getAid(Id id) {
+        return this.auxilios.get(id);
+    }
+
+    public synchronized Feriado getFeriado(Id id) {
+    	return this.feriados.get(id);
+    }
+
+    public synchronized TabelaValoresPerCapita getTabela(Id id) {
+    	return this.tabelas.get(id);
+    }
+
+    /**
+     * Retrieves the first occurrence of operator that satisfies the given
+     * {@code specification}.
+     * 
+     * @param specification an operator specification
+     * @return an operator that satisfies the given {@code specification} or
+     *         {@code null} if such entity is not stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Operadora operadoraPor(
+            Especificacao<Operadora> specification) {
+        return this.servidores.getBy(specification);
+    }
+
+    /**
+     * Retrieves the first occurrence of plan that satisfies the given {@code
+     * specification}.
+     * 
+     * @param specification a plan specification
+     * @return a plan that satisfies the given {@code specification} or {@code
+     *         null} if such entity is not stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Plano getPlanBy(Especificacao<Plano> specification) {
+        return this.planos.getBy(specification);
+    }
+
+    /**
+     * Retrieves the first occurrence of beneficiary that satisfies the given
+     * {@code specification}.
+     * 
+     * @param specification a beneficiary specification
+     * @return a beneficiary that satisfies the given {@code specification} or
+     *         {@code null} if such entity is not stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Beneficiario beneficiarioPor(
+            Especificacao<Beneficiario> specification) {
+        return this.beneficiarios.getBy(specification);
+    }
+
+    public synchronized Processo processoPor(
+            Especificacao<Processo> specification) {
+        return this.processos.getBy(specification);
+    }
+
+    /**
+     * Retrieves the first occurrence of aid that satisfies the given {@code
+     * specification}.
+     * 
+     * @param specification an aid specification
+     * @return an aid that satisfies the given {@code specification} or {@code
+     *         null} if such entity is not stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Auxilio getAidBy(Especificacao<Auxilio> specification) {
+        return this.auxilios.getBy(specification);
+    }
+
+    public synchronized Feriado getFeriadoBy(Especificacao<Feriado> e) {
+        return this.feriados.getBy(e);
+    }
+
+    public synchronized TabelaValoresPerCapita getTabelaBy(
+    		Especificacao<TabelaValoresPerCapita> e) {
+    	return this.tabelas.getBy(e);
+    }
+
+    /**
+     * Retrieves all operators that satisfy the given {@code specification}.
+     * 
+     * @param specification the specification to satisfy
+     * @return the operators that satisfy the given {@code specification} or an
+     *         empty collection if there are not such entities stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Collection<Operadora> getAllOperatorsBy(
+            Especificacao<Operadora> specification) {
+        return this.servidores.getAllBy(specification);
+    }
+
+    /**
+     * Retrieves all plans that satisfy the given {@code specification}.
+     * 
+     * @param specification the specification to satisfy
+     * @return the plans that satisfy the given {@code specification} or an
+     *         empty collection if there are not such entities stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Collection<Plano> getAllPlansBy(
+            Especificacao<Plano> specification) {
+        return this.planos.getAllBy(specification);
+    }
+
+    /**
+     * Retrieves all beneficiaries that satisfy the given {@code specification}.
+     * 
+     * @param specification the specification to satisfy
+     * @return the beneficiaries that satisfy the given {@code specification} or
+     *         an empty collection if there are not such entities stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Collection<Beneficiario> getAllBeneficiariesBy(
+            Especificacao<Beneficiario> specification) {
+        return this.beneficiarios.getAllBy(specification);
+    }
+
+    public synchronized Collection<Processo> getAllProcessosBy(
+            Especificacao<Processo> specification) {
+        return this.processos.getAllBy(specification);
+    }
+
+    /**
+     * Retrieves all aids that satisfy the given {@code specification}.
+     * 
+     * @param specification the specification to satisfy
+     * @return the aids that satisfy the given {@code specification} or an empty
+     *         collection if there are not such entities stored
+     * @throws IllegalArgumentException if the given {@code specification} is
+     *         {@code null}
+     */
+    public synchronized Collection<Auxilio> getAllAidsBy(
+            Especificacao<Auxilio> specification) {
+        return this.auxilios.getAllBy(specification);
+    }
+
+    public synchronized Collection<Feriado> getAllFeriadosBy(
+            Especificacao<Feriado> specification) {
+        return this.feriados.getAllBy(specification);
+    }
+
+    public synchronized Collection<TabelaValoresPerCapita> getAllTabelasBy(
+            Especificacao<TabelaValoresPerCapita> specification) {
+        return this.tabelas.getAllBy(specification);
+    }
+
+    /**
+     * @return all operators stored
+     */
+    public synchronized Collection<Operadora> getAllOperators() {
+        return this.servidores.getAll();
+    }
+
+    /**
+     * @return all plans stored
+     */
+    public synchronized Collection<Plano> getAllPlans() {
+        return this.planos.getAll();
+    }
+
+    /**
+     * @return all beneficiaries stored
+     */
+    public synchronized Collection<Beneficiario> getTodosBeneficiarios() {
+        return this.beneficiarios.getAll();
+    }
+
+    /**
+     * @return
+     */
+    public synchronized Collection<Processo> getAllProcessos() {
+        return this.processos.getAll();
+    }
+
+    /**
+     * @return all aids stored
+     */
+    public synchronized Collection<Auxilio> getAllAids() {
+        return this.auxilios.getAll();
+    }
+
+    public synchronized Collection<Feriado> getAllFeriados() {
+        return this.feriados.getAll();
+    }
+
+    public synchronized Collection<TabelaValoresPerCapita> getAllTabelas() {
+    	return this.tabelas.getAll();
+    }
+
+    /**
+     * @return a new valid id for operators
+     */
+    public synchronized Id novoIdOperadora() {
+        return this.servidores.getNewId();
+    }
+
+    /**
+     * @return a new valid id for plans
+     */
+    public synchronized Id getNewPlanId() {
+        return this.planos.getNewId();
+    }
+
+    /**
+     * @return a new valid id for beneficiaries
+     */
+    public synchronized Id novoIdBeneficiario() {
+        return this.beneficiarios.getNewId();
+    }
+
+    /**
+     * @return
+     */
+    public synchronized Id novoIdProcesso() {
+        return this.processos.getNewId();
+    }
+
+    /**
+     * @return a new valid id for aids
+     */
+    public synchronized Id novoIdAuxilio() {
+        return this.auxilios.getNewId();
+    }
+
+    public synchronized Id novoIdFeriado() {
+        return this.feriados.getNewId();
+    }
+
+    public synchronized Id novoIdTabela() {
+    	return this.tabelas.getNewId();
+    }
+
+//------------------------------------------------------------------------------
+
+    private void updateParentReferences(Operadora o) {
+    	Especificacao<Plano> s = new EspecificacaoOperadora(o);
+
+    	for (Plano p : this.getAllPlansBy(s)) {
+    		p.setOperadora(o);
+    		this.updatePlan(p);
+    		this.updateParentReferences(p);
+    	}
+    }
+    
+    private void updateParentReferences(Plano p) {
+        Especificacao<Auxilio> s = new AuxilioByPlanSpecification(p);
+        
+        for (Auxilio a: this.getAllAidsBy(s)) {
+            a.setPlano(p);
+            this.updateAid(a);
+        }
+    }
+
+    private void updateParentReferences(Beneficiario b) {
+    	Especificacao<Auxilio> s = new AuxilioPorBeneficiarioSpecification(b);
+
+    	for (Auxilio a : this.getAllAidsBy(s)) {
+    		a.setBeneficiario(b);
+    		this.updateAid(a);
+    	}
+    }
+
+    private void updateParentReferences(Processo p) {
+        Especificacao<Auxilio> s = new AuxilioPorProcessoSpecification(p);
+
+        for (Auxilio a : this.getAllAidsBy(s)) {
+            a.setProcesso(p);
+            this.updateAid(a);
+        }
+    }
+}
