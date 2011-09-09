@@ -13,5 +13,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl Adicionais.html -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher -war /home/ccs-cleber/projadicionais-cv/adicionais/war br.edu.ufcg.srh.adicionais.Adicionais"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="adicionais"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m -javaagent:/home/ccs-cleber/.eclipse/org.eclipse.platform_3.5.0_155965261/plugins/com.google.appengine.eclipse.sdkbundle_1.5.0.r35v201105191506/appengine-java-sdk-1.5.0.1/lib/agent/appengine-agent.jar"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:/home/ccs-cleber/.eclipse/org.eclipse.platform_3.5.0_155965261/plugins/com.google.appengine.eclipse.sdkbundle_1.5.0.r35v201105191506/appengine-java-sdk-1.5.0.1/lib/agent/appengine-agent.jar -Xmx512m"/>
 </launchConfiguration>
